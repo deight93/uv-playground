@@ -1,0 +1,76 @@
+[project]
+# 프로젝트의 이름 (PyPI 등에 배포 시 사용될 이름)
+name = "uv-playground"
+# 프로젝트 버전
+version = "0.1.0"
+# 프로젝트에 대한 간략한 설명
+description = "uv ruff test"
+# 프로젝트의 상세 설명을 담고 있는 파일 (보통 README)
+readme = "README.md"
+# 이 프로젝트를 실행하는 데 필요한 최소 Python 버전
+requires-python = ">=3.12"
+# 프로젝트 실행에 필요한 핵심 의존성 라이브러리 목록
+dependencies = [
+    # FastAPI 웹 프레임워크. [all]은 모든 선택적 의존성(예: uvicorn, pydantic 등) 포함
+    "fastapi[all]>=0.115.12",
+    # ASGI 서버 (FastAPI 애플리케이션 실행용)
+    "uvicorn>=0.34.0",
+]
+# 추가 정보 (선택 사항)
+# authors = [{name = "Your Name", email = "you@example.com"}]
+# license = {text = "MIT"}
+# classifiers = [ ... ] # PyPI 분류자
+# urls = { Homepage = "https://github.com/your-username/uv-playground" } # 프로젝트 관련 URL
+
+# -----------------------------------
+# 의존성 그룹 (선택 사항)
+# 개발, 테스트 등 특정 환경에서만 필요한 의존성을 관리합니다.
+# -----------------------------------
+[dependency-groups]
+# 개발 환경('dev')에서 필요한 의존성 그룹
+dev = [
+    # HTTP 클라이언트 라이브러리 (API 테스트 등에 사용)
+    "httpx>=0.28.1",
+    # 커밋 전 코드 검사/수정 등을 자동화하는 도구
+    "pre-commit>=4.2.0",
+    # Python 테스트 프레임워크
+    "pytest>=8.3.5",
+    # Pytest에서 asyncio 코드를 테스트하기 위한 플러그인
+    "pytest-asyncio>=0.26.0",
+    # Python 린터 및 포맷터 (이 파일 하단에서 설정)
+    "ruff>=0.11.4",
+]
+
+[tool.ruff]
+target-version = "py312"
+line-length = 88
+indent-width = 4
+
+[tool.ruff.lint]
+# E, W: pycodestyle (기본 PEP 8 위반)
+# F: Pyflakes (논리적 오류, 미사용 변수/임포트 등)
+# I: isort (임포트 순서 정렬) -> isort 대체
+# N: pep8-naming (변수/함수/클래스 이름 규칙)
+# UP: pyupgrade (최신 파이썬 문법 사용 제안)
+# B: flake8-bugbear (버그 가능성 있는 코드나 복잡한 코드)
+# A: flake8-builtins (내장 함수/타입 이름 재정의 금지)
+# C4: flake8-comprehensions (불필요하게 복잡한 컴프리헨션 개선)
+# T20: flake8-print (print 문 사용 감지 - 로깅 사용 권장)
+# SIM: flake8-simplify (코드 단순화 제안)
+# PTH: flake8-use-pathlib (os.path 대신 pathlib 사용 권장)
+select = ["E", "F", "W", "I", "N", "UP", "B", "A", "C4", "T20", "SIM", "PTH"]
+ignore = ["E501"]
+
+# (`--fix`가 제공된 경우) 모든 활성화된 규칙에 대한 수정을 허용합니다.
+fixable = ["ALL"]
+unfixable = []
+
+[tool.ruff.format]
+# 문자열 따옴표 스타일 (" 또는 ')
+quote-style = "double"
+# 들여쓰기 스타일 (space 또는 tab)
+indent-style = "space"
+# 매직 트레일링 콤마 사용 (Black 기본값)
+skip-magic-trailing-comma = false
+# 줄 끝 문자 (lf, crlf, native) - 보통 lf 사용
+line-ending = "lf"
