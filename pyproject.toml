@@ -74,3 +74,9 @@ indent-style = "space"
 skip-magic-trailing-comma = false
 # 줄 끝 문자 (lf, crlf, native) - 보통 lf 사용
 line-ending = "lf"
+
+[tool.setuptools]
+packages = ["app"]
+
+[tool.setuptools.exclude-package-data]
+"*" = ["img/*"]
