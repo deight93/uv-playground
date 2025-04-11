@@ -24,15 +24,20 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
 
+      - name: Create virtual environment
+        run: uv venv
+
+      - name: Activate virtual environment
+        run: echo "$PWD/.venv/bin" >> $GITHUB_PATH
+
       - name: Install dependencies using uv
-        run: |
-          uv pip install .[dev]
+        run: uv pip install .[dev]
 
       - name: Lint with ruff
         run: |
           uv run ruff check .
-          uv run ruff format --check . # 포맷팅 변경 사항 없는지 확인
+          uv run ruff format --check .
 
       - name: Test with pytest
-        run: |
-          uv run pytest
+        run: uv run pytest
+
