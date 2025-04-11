@@ -1,0 +1,10 @@
+repos:
+  -   repo: https://github.com/astral-sh/ruff-pre-commit
+      # Ruff 버전은 pyproject.toml과 맞추거나 최신 버전 명시
+      rev: v0.11.5 # 예시 버전, 최신 릴리즈 확인 후 사용
+      hooks:
+        # ruff 포맷터 실행
+        -   id: ruff-format
+        # ruff 린터 실행 (자동 수정 포함)
+        -   id: ruff
+            args: [--fix, --exit-non-zero-on-fix] # 수정 사항 있으면 커밋 실패 처리
